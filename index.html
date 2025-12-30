@@ -1,0 +1,247 @@
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birth Day 💖</title>
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3c3c5c3b57.mp3" type="audio/mpeg">
+  </audio>
+  <style>
+    *{box-sizing:border-box;font-family:'Poppins','Comic Sans MS',sans-serif}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#ffe0ec,#fff);display:flex;justify-content:center;align-items:center;transition:opacity .4s ease}
+    .card{background:#fff;width:95%;max-width:420px;border-radius:30px;padding:25px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,.15)}
+    h1{color:#ff4f8b}
+    input,button{width:100%;padding:12px;border-radius:20px;border:none;margin-top:10px;font-size:15px}
+    input{background:#f2f2f2}
+    button{background:#ff4f8b;color:#fff;cursor:pointer}
+    button:hover{background:#ff2f73}
+    .hidden{display:none}
+    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:15px}
+    .gallery img{width:100%;border-radius:20px}
+
+    /* NOTE PAPER */
+    /* NOTE PAPER – DEWASA & RAPI */
+.caption{
+  font-size:14px;
+  color:#444;
+  margin-bottom:20px;
+  background:#fdfdfb;
+  padding:16px 16px 18px;
+  border-radius:14px;
+  line-height:1.7;
+  position:relative;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.10),
+    inset 0 0 0 1px rgba(0,0,0,.04);
+  
+  /* font normal, ga alay */
+  font-family:'Poppins',system-ui,sans-serif;
+  
+  /* tekstur kertas halus */
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,.03) 1px,
+      transparent 1px
+    );
+  background-size:100% 32px;
+}
+
+/* tape/pita */
+.caption::before{
+  content:'';
+  position:absolute;
+  top:-10px;
+  left:24px;
+  width:70px;
+  height:20px;
+  background:#e9d5c3;
+  opacity:.85;
+  border-radius:4px;
+  box-shadow:0 4px 8px rgba(0,0,0,.12);
+  transform:rotate(-2deg);
+}
+
+/* tekstur pita */
+.caption::after{
+  content:'';
+  position:absolute;
+  top:-10px;
+  left:24px;
+  width:70px;
+  height:20px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.35),
+      rgba(255,255,255,.35) 3px,
+      transparent 3px,
+      transparent 6px
+    );
+  border-radius:4px;
+  pointer-events:none;
+}
+
+
+    /* efek lucu */
+    .heart{position:fixed;font-size:20px;animation:floatUp 2s ease forwards;pointer-events:none}
+    @keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-80px) scale(1.5);opacity:0}}
+
+    .badge{display:inline-block;background:#ffe3ef;color:#ff4f8b;padding:6px 12px;border-radius:999px;font-size:12px;margin:6px}
+    .sparkle{animation:spark 1.2s ease-in-out infinite}
+    @keyframes spark{0%,100%{opacity:.6}50%{opacity:1}}
+
+    .cake{font-size:80px;cursor:pointer;margin:15px 0}
+    .note{font-size:14px;color:#555;margin-top:10px}
+
+    .bear-pop{position:fixed;bottom:20px;right:20px;background:#fff;padding:10px 15px;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,.2);font-size:14px;animation:popBear .8s ease}
+    @keyframes popBear{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
+
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:flex;justify-content:center;align-items:center}
+    .modal img{max-width:90%;border-radius:20px}
+    .modal p{color:#fff;margin-top:15px;font-size:15px;text-align:center}
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="card" id="login">
+  <h1>Hai Kapuak 🧸</h1>
+  <p>Login dulu ya 💕</p>
+  <input id="user" placeholder="Username kamu" />
+  <input id="date" placeholder="Tanggal lahir (DDMMYY)" />
+  <button onclick="login()">Masuk 💖</button>
+  <p style="font-size:12px;color:#777;margin-top:8px">🎶 Musik akan otomatis diputar setelah login</p>
+</div>
+
+<!-- BERANDA -->
+<div class="card hidden" id="home">
+  <div class="cake" onclick="blowCandle()">🎂</div>
+  <div id="cakeNote" class="note hidden">✨ Lilinnya padam… semoga doa-doa kita ikut terbang ke langit ✨</div>
+  <div id="popup" class="hidden" style="background:#fff0f6;padding:15px;border-radius:20px;margin-bottom:15px;color:#ff4f8b;font-size:14px"></div>
+  <h1 class="sparkle">🎉Happy Birthday 22🎉</h1>
+  <div>
+    <span class="badge">#HBDKapuak</span>
+    <span class="badge">#22WithYou</span>
+    <span class="badge">#ForeverUs</span>
+  </div>
+  <p>Selamat ulang tahun twin 🤍<br>
+hehe udah 22 aja ya kita kak,baru kemaren kita main hujan,,semoga dipermudah segala urusannya amin ✨</p>
+  <button onclick="openGallery()">Buka Galeri Kenangan 📸</button>
+  <button onclick="showPopup()">Pesan Random 💌</button>
+  <button onclick="bearHello()">Beruang Nyapa 🧸</button>
+</div>
+
+<!-- GALERI -->
+<div class="card hidden" id="gallery">
+  <button style="margin-bottom:10px;background:#ffe3ef;color:#ff4f8b" onclick="backHome()">⬅ Kembali ke Beranda</button>
+  <h1>Galeri Kita 💕</h1>
+
+  <div class="gallery">
+    <img src="img1.png" onclick="openModal(this,'Sekecil ini aku dulu… dan sejak awal, aku sudah punya kamu 🤍')" />
+    <div class="caption">Sejak pertama kali membuka mata di dunia,
+kita ga sendiri.
+Kita dibungkus kain yang sama,
+dititipkan dalam pelukan yang sama,
+dan tanpa sadar…
+Allah sudah menuliskan:
+kita akan saling menjadi rumah.</div>
+
+    <img src="img2.png" onclick="openModal(this,'Masa kecil penuh tawa, dan kamu selalu di sana.')" />
+    <div class="caption">Kita tumbuh dari tawa sederhana.
+Main hujan, lari tanpa arah,
+dan pulang dengan baju basah yaa walaupun dulu kita kaya orang gila kalo berantem wkwk tapi kita tetap ada untuk satu sama lain.</div>
+
+    <img src="img3.png" onclick="openModal(this,'Kita tumbuh, belajar kuat, tapi tidak pernah berpisah.')" />
+    <div class="caption">Kita pernah bandel bareng,
+pernah kabur,
+pernah diam-diam sama-sama.
+Bukan karena sempurna,
+tapi karena kita belajar
+tumbuh bareng,
+salah bareng,
+lalu kuat bareng.
+keinget waktu kita kabur trus ga tau mau kemana duduk di pinggir jalan trus rencannya kita gantian tidurnya eh malah aku tidurnya keterusan hehe</div>
+
+    <img src="img4.jpg" onclick="openModal(this,'Hari ini 22 tahun. Aku selalu mendoakanmu dalam diam 🤍')" />
+    <div class="caption">Hari ini kita 22 tahun 💖 Meski jarang bertemu,
+kita belajar saling menguatkan
+dengan cara yang lebih dewasa.</div>
+  </div>
+
+  <button onclick="hug(); sprinkleHearts()">Peluk Virtual 🤗</button>
+  <button onclick="sprinkleHearts()">Tabur Cinta 💕</button>
+  <p id="hugText" class="hidden" style="margin-top:15px;color:#ff4f8b;font-weight:600">💌 Pelukan terkirim untuk kembaranku tercinta 💌</p>
+</div>
+
+<script>
+function login(){
+  const u=document.getElementById('user').value;
+  const d=document.getElementById('date').value;
+  if(u!=='' && d==='030104'){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('music').play();
+    document.getElementById('home').classList.remove('hidden');
+  }else{
+    alert('Username atau tanggal lahir salah 🥺');
+  }
+}
+function openGallery(){
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('gallery').classList.remove('hidden');
+}
+function hug(){
+  const text=document.getElementById('hugText');
+  text.classList.remove('hidden');
+}
+function sprinkleHearts(){
+  for(let i=0;i<10;i++){
+    const h=document.createElement('div');
+    h.className='heart';
+    h.innerText=['💖','💗','💞','🧸','✨'][Math.floor(Math.random()*5)];
+    h.style.left=Math.random()*100+'vw';
+    h.style.top=(60+Math.random()*20)+'vh';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+const messages=[
+  '🤍 semangat kuliahnya,semoga wisuda kita bisa saling dateng',
+  '🧸 semoga kapuak semakin sabar.',
+  '✨ Hidup ribet, untung ada aku hehe .',
+  '🌙 terimakasih udh jadi kakak yang baik.',
+  '💖 terimakasih udah sabar menghadapi aisyah yang lucu ini.'
+];
+function showPopup(){
+  const p=document.getElementById('popup');
+  p.innerText=messages[Math.floor(Math.random()*messages.length)];
+  p.classList.remove('hidden');
+  sprinkleHearts();
+}
+function blowCandle(){
+  document.getElementById('cakeNote').classList.remove('hidden');
+  sprinkleHearts();
+}
+function bearHello(){
+  const b=document.createElement('div');
+  b.className='bear-pop';
+  b.innerText='🧸 psst… gosah nangis gitu dong:v';
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),2500);
+}
+function openModal(img,text){
+  const m=document.createElement('div');
+  m.className='modal';
+  m.innerHTML=`<div><img src='${img.src}'/><p>${text}</p></div>`;
+  m.onclick=()=>m.remove();
+  document.body.appendChild(m);
+}
+function backHome(){
+  document.getElementById('gallery').classList.add('hidden');
+  document.getElementById('home').classList.remove('hidden');
+}
+</script>
+
+<footer style="position:fixed;bottom:12px;font-size:12px;color:#ff4f8b;opacity:.7">untuk kakak  🤍</footer>
+</body>
+</html>
